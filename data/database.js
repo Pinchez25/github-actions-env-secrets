@@ -7,7 +7,7 @@ const dbAddress = process.env.MONGODB_ADDRESS;
 const dbName = process.env.MONGODB_DB_NAME;
 
 // const uri = `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
-const uri = `mongodb://${dbAddress}`;
+const uri = `mongodb://${dbAddress}/${dbName}`;
 const client = new MongoClient(uri);
 
 console.log('Trying to connect to db');
