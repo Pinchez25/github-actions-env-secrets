@@ -10,6 +10,7 @@ env:
 
 jobs:
     test:
+        environment: testing
         env:
             MONGODB_ADDRESS: ${{ secrets.MONGODB_ADDRESS}}
             PORT: ${{ secrets.PORT }}
