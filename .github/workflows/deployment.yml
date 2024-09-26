@@ -1,0 +1,51 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  MONGODB_DB_NAME: test
+
+jobs:
+    test:
+        env:
+            MONGODB_ADDRESS: https://b281-2c0f-2a80-10d8-3f10-7021-a7d7-45ff-68c0.ngrok-free.app
+            PORT: 3000
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Cache dependencies
+              uses: actions/cache@v4
+              with:
+                path: |
+                  ~/.npm
+                  ~/.cache/ms-playwright
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
+            - name: Install dependencies
+              run: npm ci
+            - name: Run Server
+              run: npm start & npx wait-on http://localhost:$PORT
+            - name: Run tests
+              run: npm test
+            - name: Output info
+              run: |
+                echo "MONGODB_ADDRESS: ${{ env.MONGODB_ADDRESS }}"
+                echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: Deploy
+              run: |
+                echo "Deploying to ${{ env.MONGODB_DB_NAME }}"
+                
+            
+                
+    
+    
