@@ -11,7 +11,7 @@ env:
 jobs:
     test:
         env:
-            MONGODB_ADDRESS: https://b281-2c0f-2a80-10d8-3f10-7021-a7d7-45ff-68c0.ngrok-free.app
+            MONGODB_ADDRESS: b281-2c0f-2a80-10d8-3f10-7021-a7d7-45ff-68c0.ngrok-free.app
             PORT: 3000
         runs-on: ubuntu-latest
         steps:
