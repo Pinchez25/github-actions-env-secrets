@@ -11,8 +11,8 @@ env:
 jobs:
     test:
         env:
-            MONGODB_ADDRESS: 5.tcp.eu.ngrok.io:13601
-            PORT: 3000
+            MONGODB_ADDRESS: ${{ secrets.MONGODB_ADDRESS}}
+            PORT: ${{ secrets.PORT }}
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
